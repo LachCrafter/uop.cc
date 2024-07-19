@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.modules.client;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.ClientEvent;
 import me.alpha432.oyvey.features.command.Command;
 import me.alpha432.oyvey.features.gui.OyVeyGui;
@@ -9,7 +9,6 @@ import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import me.alpha432.oyvey.util.TextUtil;
 
 public class ClickGui
@@ -67,12 +66,12 @@ public class ClickGui
     @SubscribeEvent
     public void onSettingChange(ClientEvent event) {
         if (event.getStage() == 2 && event.getSetting().getFeature().equals(this)) {
-            OyVey.commandManager.setClientMessage(getCommandMessage());
+            uop.commandManager.setClientMessage(getCommandMessage());
             if (event.getSetting().equals(this.prefix)) {
-                OyVey.commandManager.setPrefix(this.prefix.getPlannedValue());
-                Command.sendMessage("Prefix set to " + ChatFormatting.DARK_GRAY + OyVey.commandManager.getPrefix());
+                uop.commandManager.setPrefix(this.prefix.getPlannedValue());
+                Command.sendMessage("Prefix set to " + ChatFormatting.DARK_GRAY + uop.commandManager.getPrefix());
             }
-            OyVey.colorManager.setColor(this.red.getPlannedValue(), this.green.getPlannedValue(), this.blue.getPlannedValue(), this.hoverAlpha.getPlannedValue());
+            uop.colorManager.setColor(this.red.getPlannedValue(), this.green.getPlannedValue(), this.blue.getPlannedValue(), this.hoverAlpha.getPlannedValue());
         }
     }
 
@@ -83,9 +82,9 @@ public class ClickGui
 
     @Override
     public void onLoad() {
-        OyVey.colorManager.setColor(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.hoverAlpha.getValue());
-        OyVey.commandManager.setPrefix(this.prefix.getValue());
-        OyVey.commandManager.setClientMessage(getCommandMessage());
+        uop.colorManager.setColor(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.hoverAlpha.getValue());
+        uop.commandManager.setPrefix(this.prefix.getValue());
+        uop.commandManager.setClientMessage(getCommandMessage());
     }
 
     @Override

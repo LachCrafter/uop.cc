@@ -11,10 +11,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import me.alpha432.oyvey.OyVey;
-import me.alpha432.oyvey.features.modules.Module;
+import me.alpha432.oyvey.uop;
 
 @Mixin(value = {FontRenderer.class})
 public abstract class MixinFontRenderer {
@@ -25,7 +23,7 @@ public abstract class MixinFontRenderer {
     @Inject(method={"drawString(Ljava/lang/String;FFIZ)I"}, at={@At(value="HEAD")}, cancellable=true)
     public void drawString(String text, float x, float y, int color, boolean dropShadow, CallbackInfoReturnable<Integer> ci) {
         if (FontMod.getInstance().isOn() && FontMod.getInstance().minecraft.getValue()) {
-            ci.setReturnValue((int) OyVey.textManager.drawString(text, x, y, color, dropShadow));
+            ci.setReturnValue((int) uop.textManager.drawString(text, x, y, color, dropShadow));
         }
     }
     
@@ -42,7 +40,7 @@ public abstract class MixinFontRenderer {
     @Overwrite
     public int getStringWidth(String text) {
         if (FontMod.getInstance().isOn() && FontMod.getInstance().minecraft.getValue()) {
-            return OyVey.textManager.getStringWidth(text);
+            return uop.textManager.getStringWidth(text);
         }
         text = FCAIALM.getINSTANCE().replaceWithAliases(text);
         text = AllCaps.getINSTANCE().changeCaps(text);

@@ -1,6 +1,6 @@
 package me.alpha432.oyvey.features.gui.components.items.buttons;
 
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.gui.OyVeyGui;
 import me.alpha432.oyvey.features.gui.components.Component;
 import me.alpha432.oyvey.features.gui.components.items.Item;
@@ -20,9 +20,9 @@ public class Button
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        RenderUtil.drawRect(this.x, this.y, this.x + (float) this.width, this.y + (float) this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? OyVey.colorManager.getColorWithAlpha(OyVey.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : OyVey.colorManager.getColorWithAlpha(OyVey.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue())) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
+        RenderUtil.drawRect(this.x, this.y, this.x + (float) this.width, this.y + (float) this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? uop.colorManager.getColorWithAlpha(uop.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : uop.colorManager.getColorWithAlpha(uop.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue())) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
         RenderUtil.drawGradientRect(this.x, this.y, this.x + (float) this.width, this.y + (float) this.height - 0.5f, 0x20ffffff, 0x10ffffff, true);
-        OyVey.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 2.0f - (float) OyVeyGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
+        uop.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 2.0f - (float) OyVeyGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
     }
 
     @Override

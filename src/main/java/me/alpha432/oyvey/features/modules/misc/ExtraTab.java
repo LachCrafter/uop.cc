@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.modules.misc;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -20,7 +20,7 @@ public class ExtraTab
     public static String getPlayerName(NetworkPlayerInfo networkPlayerInfoIn) {
         String name;
         String string = name = networkPlayerInfoIn.getDisplayName() != null ? networkPlayerInfoIn.getDisplayName().getFormattedText() : ScorePlayerTeam.formatPlayerName(networkPlayerInfoIn.getPlayerTeam(), networkPlayerInfoIn.getGameProfile().getName());
-        if (OyVey.friendManager.isFriend(name)) {
+        if (uop.friendManager.isFriend(name)) {
             return ChatFormatting.AQUA + name;
         }
         return name;

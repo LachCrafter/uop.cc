@@ -4,7 +4,6 @@ import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 import me.alpha432.oyvey.event.events.Render2DEvent;
 import me.alpha432.oyvey.util.ColorUtil;
-import me.alpha432.oyvey.OyVey;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import me.alpha432.oyvey.features.modules.client.ClickGui;

@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.modules.client;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.ClientEvent;
 import me.alpha432.oyvey.features.command.Command;
 import me.alpha432.oyvey.features.modules.Module;
@@ -65,7 +65,7 @@ public class FontMod
     @Override
     public void onTick() {
         if (this.reloadFont) {
-            OyVey.textManager.init(false);
+            uop.textManager.init(false);
             this.reloadFont = false;
         }
     }

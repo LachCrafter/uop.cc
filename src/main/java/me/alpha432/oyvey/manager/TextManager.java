@@ -1,13 +1,11 @@
 package me.alpha432.oyvey.manager;
 
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.Feature;
 import me.alpha432.oyvey.features.gui.font.CustomFont;
 import me.alpha432.oyvey.features.modules.client.FontMod;
 import me.alpha432.oyvey.util.Timer;
 import net.minecraft.util.math.MathHelper;
-import me.alpha432.oyvey.util.ColorUtil;
-import me.alpha432.oyvey.features.modules.client.ClickGui;
 import me.alpha432.oyvey.features.modules.combat.FCAIALM;
 import me.alpha432.oyvey.features.modules.misc.AllCaps;
 
@@ -27,7 +25,7 @@ public class TextManager
     }
 
     public void init(boolean startup) {
-        FontMod cFont = OyVey.moduleManager.getModuleByClass(FontMod.class);
+        FontMod cFont = uop.moduleManager.getModuleByClass(FontMod.class);
         try {
             this.setFontRenderer(new Font(cFont.fontName.getValue(), cFont.fontStyle.getValue(), cFont.fontSize.getValue()), cFont.antiAlias.getValue(), cFont.fractionalMetrics.getValue());
         } catch (Exception exception) {
@@ -42,7 +40,7 @@ public class TextManager
     public float drawString(String text, float x, float y, int color, boolean shadow) {
         text = FCAIALM.getINSTANCE().replaceWithAliases(text);
         text = AllCaps.getINSTANCE().changeCaps(text);
-        if (OyVey.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
+        if (uop.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
             if (shadow) {
                 return this.customFont.drawStringWithShadow(text, x, y, color);
             } else {
@@ -55,14 +53,14 @@ public class TextManager
     public int getStringWidth(String text) {
         text = FCAIALM.getINSTANCE().replaceWithAliases(text);
         text = AllCaps.getINSTANCE().changeCaps(text);
-        if (OyVey.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
+        if (uop.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
             return this.customFont.getStringWidth(text);
         }
         return TextManager.mc.fontRenderer.getStringWidth(text);
     }
 
     public int getFontHeight() {
-        if (OyVey.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
+        if (uop.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
             String text = "A";
             return this.customFont.getStringHeight(text);
         }

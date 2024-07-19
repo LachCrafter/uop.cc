@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
 @Mod(modid = "uop.cc", name = "uop.cc", version = "2.0")
-public class OyVey {
+public class uop {
     public static final String MODID = "uop.cc";
     public static final String MODNAME = "uop.cc";
     public static final String MODVER = "2.0";
@@ -32,7 +32,7 @@ public class OyVey {
     public static EventManager eventManager;
     public static TextManager textManager;
     @Mod.Instance
-    public static OyVey INSTANCE;
+    public static uop INSTANCE;
     private static boolean unloaded;
 
     static {
@@ -79,7 +79,7 @@ public class OyVey {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
         }
-        OyVey.onUnload();
+        uop.onUnload();
         eventManager = null;
         friendManager = null;
         speedManager = null;
@@ -99,15 +99,15 @@ public class OyVey {
     }
 
     public static void reload() {
-        OyVey.unload(false);
-        OyVey.load();
+        uop.unload(false);
+        uop.load();
     }
 
     public static void onUnload() {
         if (!unloaded) {
             eventManager.onUnload();
             moduleManager.onUnload();
-            configManager.saveConfig(OyVey.configManager.config.replaceFirst("uop/", ""));
+            configManager.saveConfig(uop.configManager.config.replaceFirst("uop/", ""));
             moduleManager.onUnloadPost();
             unloaded = true;
         }
@@ -120,7 +120,7 @@ public class OyVey {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         Display.setTitle("uop.cc");
-        OyVey.load();
+        uop.load();
     }
 }
 

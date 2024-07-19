@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.command.commands;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.command.Command;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Bind;
@@ -21,7 +21,7 @@ public class BindCommand
         }
         String rkey = commands[1];
         String moduleName = commands[0];
-        Module module = OyVey.moduleManager.getModuleByName(moduleName);
+        Module module = uop.moduleManager.getModuleByName(moduleName);
         if (module == null) {
             BindCommand.sendMessage("Unknown module '" + module + "'!");
             return;

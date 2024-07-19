@@ -3,17 +3,10 @@ package me.alpha432.oyvey.features.modules.hud;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 import me.alpha432.oyvey.event.events.Render2DEvent;
-import me.alpha432.oyvey.util.RenderUtil;
 import me.alpha432.oyvey.util.ColorUtil;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.modules.client.ClickGui;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import com.mojang.realmsclient.gui.ChatFormatting;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ArrayListJ extends Module {
     public enum RenderMode {Left, Down, Up}
@@ -27,9 +20,9 @@ public class ArrayListJ extends Module {
     }
 
     public void onRender2D(Render2DEvent event) {
-        OyVey.moduleManager.sortModules(true);
-        for (int k = 0; k < OyVey.moduleManager.sortedModules.size(); k++) {
-            Module module = OyVey.moduleManager.sortedModules.get(k);
+        uop.moduleManager.sortModules(true);
+        for (int k = 0; k < uop.moduleManager.sortedModules.size(); k++) {
+            Module module = uop.moduleManager.sortedModules.get(k);
             String str = module.getFullArrayString() + ChatFormatting.RESET;
             if (prefix.getValue()) {
                 if (rendermode.getValue() == RenderMode.Left) {

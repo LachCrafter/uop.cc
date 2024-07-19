@@ -1,6 +1,6 @@
 package me.alpha432.oyvey.util;
 
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -291,8 +291,8 @@ public class RenderUtil
         GlStateManager.pushMatrix();
         RenderUtil.glBillboardDistanceScaled((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, RenderUtil.mc.player, 1.0f);
         GlStateManager.disableDepth();
-        GlStateManager.translate(-((double) OyVey.textManager.getStringWidth(text) / 2.0), 0.0, 0.0);
-        OyVey.textManager.drawStringWithShadow(text, 0.0f, 0.0f, -5592406);
+        GlStateManager.translate(-((double) uop.textManager.getStringWidth(text) / 2.0), 0.0, 0.0);
+        uop.textManager.drawStringWithShadow(text, 0.0f, 0.0f, -5592406);
         GlStateManager.popMatrix();
     }
 

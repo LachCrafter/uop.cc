@@ -5,8 +5,7 @@ import me.alpha432.oyvey.features.setting.Setting;
 import me.alpha432.oyvey.features.modules.client.ClickGui;
 import me.alpha432.oyvey.event.events.Render2DEvent;
 import me.alpha432.oyvey.util.ColorUtil;
-import me.alpha432.oyvey.OyVey;
-import net.minecraft.potion.Potion;
+import me.alpha432.oyvey.uop;
 import net.minecraft.potion.PotionEffect;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class BetterPotions extends Module {
             
             switch (listpos.getValue()) {
                 case TopRight: {
-                    String str = OyVey.potionManager.getColoredPotionString(potionEffect);
+                    String str = uop.potionManager.getColoredPotionString(potionEffect);
                     posX = this.renderer.scaledWidth - this.renderer.getStringWidth(str) - 2;
                     posY = 2 + i;
                     break;
@@ -45,7 +44,7 @@ public class BetterPotions extends Module {
                     break;
                 }
                 case Hotbar: {
-                    String str = OyVey.potionManager.getColoredPotionString(potionEffect);
+                    String str = uop.potionManager.getColoredPotionString(potionEffect);
                     posX = (this.renderer.scaledWidth - this.renderer.getStringWidth(str)) / 2;
                     posY = this.renderer.scaledHeight - 85 - i;
                     break;
@@ -61,7 +60,7 @@ public class BetterPotions extends Module {
     
     public boolean drawPotion(PotionEffect potionEffect, int posX, int posY) {
         String potionString = potionEffect.getPotion().getName();
-        String str = OyVey.potionManager.getColoredPotionString(potionEffect);
+        String str = uop.potionManager.getColoredPotionString(potionEffect);
         int color = (!sync.getValue() ? potionEffect.getPotion().getLiquidColor() : (ClickGui.getInstance().rainbow.getValue() ? ColorUtil.toRGBA(ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue())) : ColorUtil.toRGBA(ClickGui.getInstance().red.getValue(), ClickGui.getInstance().green.getValue(), ClickGui.getInstance().blue.getValue())));
 
         switch (importantpotionmode.getValue()) {

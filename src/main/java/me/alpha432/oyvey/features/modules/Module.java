@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.modules;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.ClientEvent;
 import me.alpha432.oyvey.event.events.Render2DEvent;
 import me.alpha432.oyvey.event.events.Render3DEvent;
@@ -102,7 +102,7 @@ public class Module
         this.onToggle();
         this.onEnable();
         if (ClickGui.getInstance().toggleMsg.getValue() && !this.getDisplayName().contains("CAMessage") && !this.getDisplayName().contains("Client")) {
-            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.GRAY +  this.getDisplayName() + ChatFormatting.GREEN +" on!");
+            TextComponentString text = new TextComponentString(uop.commandManager.getClientMessage() + " " + ChatFormatting.GRAY +  this.getDisplayName() + ChatFormatting.GREEN +" on!");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
         if (this.isOn() && this.hasListener && !this.alwaysListening) {
@@ -116,7 +116,7 @@ public class Module
         }
         this.enabled.setValue(false);
         if (ClickGui.getInstance().toggleMsg.getValue() && !this.getDisplayName().contains("CAMessage") && !this.getDisplayName().contains("Client")) {
-            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.GRAY +  this.getDisplayName() + ChatFormatting.RED +" off.");
+            TextComponentString text = new TextComponentString(uop.commandManager.getClientMessage() + " " + ChatFormatting.GRAY +  this.getDisplayName() + ChatFormatting.RED +" off.");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
         this.onToggle();
@@ -136,8 +136,8 @@ public class Module
     }
 
     public void setDisplayName(String name) {
-        Module module = OyVey.moduleManager.getModuleByDisplayName(name);
-        Module originalModule = OyVey.moduleManager.getModuleByName(name);
+        Module module = uop.moduleManager.getModuleByDisplayName(name);
+        Module originalModule = uop.moduleManager.getModuleByName(name);
         if (module == null && originalModule == null) {
             Command.sendMessage(this.getDisplayName() + ", name: " + this.getName() + ", has been renamed to: " + name);
             this.displayName.setValue(name);

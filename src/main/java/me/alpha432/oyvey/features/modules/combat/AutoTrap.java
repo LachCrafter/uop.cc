@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.modules.combat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.command.Command;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
@@ -145,7 +145,7 @@ public class AutoTrap
         EntityPlayer target = null;
         double distance = Math.pow(range, 2.0) + 1.0;
         for (EntityPlayer player : AutoTrap.mc.world.playerEntities) {
-            if (EntityUtil.isntValid(player, range) || trapped && EntityUtil.isTrapped(player, this.antiScaffold.getValue(), this.antiStep.getValue(), false, false, false) || OyVey.speedManager.getPlayerSpeed(player) > 10.0)
+            if (EntityUtil.isntValid(player, range) || trapped && EntityUtil.isTrapped(player, this.antiScaffold.getValue(), this.antiStep.getValue(), false, false, false) || uop.speedManager.getPlayerSpeed(player) > 10.0)
                 continue;
             if (target == null) {
                 target = player;

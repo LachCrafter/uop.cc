@@ -1,11 +1,8 @@
 package me.alpha432.oyvey.features.command.commands;
 
-import me.alpha432.oyvey.OyVey;
 import me.alpha432.oyvey.features.command.Command;
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public class NameMCCommand
         extends Command {

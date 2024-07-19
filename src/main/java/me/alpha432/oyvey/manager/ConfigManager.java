@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.manager;
 
 import com.google.gson.*;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.Feature;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Bind;
@@ -13,7 +13,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -53,7 +52,7 @@ public class ConfigManager implements Util {
                 }
                 return;
         }
-        OyVey.LOGGER.error("Unknown Setting type for: " + feature.getName() + " : " + setting.getName());
+        uop.LOGGER.error("Unknown Setting type for: " + feature.getName() + " : " + setting.getName());
     }
 
     private static void loadFile(JsonObject input, Feature feature) {
@@ -62,7 +61,7 @@ public class ConfigManager implements Util {
             JsonElement element = entry.getValue();
             if (feature instanceof FriendManager) {
                 try {
-                    OyVey.friendManager.addFriend(new FriendManager.Friend(element.getAsString(), UUID.fromString(settingName)));
+                    uop.friendManager.addFriend(new FriendManager.Friend(element.getAsString(), UUID.fromString(settingName)));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -90,7 +89,7 @@ public class ConfigManager implements Util {
         } else {
             this.config = "oyvey/config/";
         }
-        OyVey.friendManager.onLoad();
+        uop.friendManager.onLoad();
         for (Feature feature : this.features) {
             try {
                 loadSettings(feature);
@@ -111,7 +110,7 @@ public class ConfigManager implements Util {
         File path = new File(this.config);
         if (!path.exists())
             path.mkdir();
-        OyVey.friendManager.saveFriends();
+        uop.friendManager.saveFriends();
         for (Feature feature : this.features) {
             try {
                 saveSettings(feature);
@@ -182,11 +181,11 @@ public class ConfigManager implements Util {
     }
 
     public void init() {
-        this.features.addAll(OyVey.moduleManager.modules);
-        this.features.add(OyVey.friendManager);
+        this.features.addAll(uop.moduleManager.modules);
+        this.features.add(uop.friendManager);
         String name = loadCurrentConfig();
         loadConfig(name);
-        OyVey.LOGGER.info("Config loaded.");
+        uop.LOGGER.info("Config loaded.");
     }
 
     private void loadSettings(Feature feature) throws IOException {
@@ -202,7 +201,7 @@ public class ConfigManager implements Util {
         try {
             loadFile((new JsonParser()).parse(new InputStreamReader(stream)).getAsJsonObject(), feature);
         } catch (IllegalStateException e) {
-            OyVey.LOGGER.error("Bad Config File for: " + feature.getName() + ". Resetting...");
+            uop.LOGGER.error("Bad Config File for: " + feature.getName() + ". Resetting...");
             loadFile(new JsonObject(), feature);
         }
         stream.close();

@@ -1,8 +1,7 @@
 package me.alpha432.oyvey.features.modules.client;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
-import me.alpha432.oyvey.event.events.ClientEvent;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.Render2DEvent;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
@@ -118,15 +117,15 @@ public class HUD extends Module {
         if (this.arrayList.getValue().booleanValue())
             if (this.renderingUp.getValue().booleanValue()) {
                 if (this.renderingMode.getValue() == RenderingMode.ABC) {
-                    for (int k = 0; k < OyVey.moduleManager.sortedModulesABC.size(); k++) {
-                        String str = OyVey.moduleManager.sortedModulesABC.get(k);
+                    for (int k = 0; k < uop.moduleManager.sortedModulesABC.size(); k++) {
+                        String str = uop.moduleManager.sortedModulesABC.get(k);
                         this.renderer.drawString(str, (width - 2 - this.renderer.getStringWidth(str)), (2 + j * 10), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                         j++;
                         counter1[0] = counter1[0] + 1;
                     }
                 } else {
-                    for (int k = 0; k < OyVey.moduleManager.sortedModules.size(); k++) {
-                        Module module = OyVey.moduleManager.sortedModules.get(k);
+                    for (int k = 0; k < uop.moduleManager.sortedModules.size(); k++) {
+                        Module module = uop.moduleManager.sortedModules.get(k);
                         String str = module.getDisplayName() + ChatFormatting.GRAY + ((module.getDisplayInfo() != null) ? (" [" + ChatFormatting.WHITE + module.getDisplayInfo() + ChatFormatting.GRAY + "]") : "");
                         this.renderer.drawString(str, (width - 2 - this.renderer.getStringWidth(str)), (2 + j * 10), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                         j++;
@@ -134,15 +133,15 @@ public class HUD extends Module {
                     }
                 }
             } else if (this.renderingMode.getValue() == RenderingMode.ABC) {
-                for (int k = 0; k < OyVey.moduleManager.sortedModulesABC.size(); k++) {
-                    String str = OyVey.moduleManager.sortedModulesABC.get(k);
+                for (int k = 0; k < uop.moduleManager.sortedModulesABC.size(); k++) {
+                    String str = uop.moduleManager.sortedModulesABC.get(k);
                     j += 10;
                     this.renderer.drawString(str, (width - 2 - this.renderer.getStringWidth(str)), (height - j), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                     counter1[0] = counter1[0] + 1;
                 }
             } else {
-                for (int k = 0; k < OyVey.moduleManager.sortedModules.size(); k++) {
-                    Module module = OyVey.moduleManager.sortedModules.get(k);
+                for (int k = 0; k < uop.moduleManager.sortedModules.size(); k++) {
+                    Module module = uop.moduleManager.sortedModules.get(k);
                     String str = module.getDisplayName() + ChatFormatting.GRAY + ((module.getDisplayInfo() != null) ? (" [" + ChatFormatting.WHITE + module.getDisplayInfo() + ChatFormatting.GRAY + "]") : "");
                     j += 10;
                     this.renderer.drawString(str, (width - 2 - this.renderer.getStringWidth(str)), (height - j), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
@@ -155,13 +154,13 @@ public class HUD extends Module {
             if (this.potions.getValue().booleanValue()) {
                 List<PotionEffect> effects = new ArrayList<>((Minecraft.getMinecraft()).player.getActivePotionEffects());
                 for (PotionEffect potionEffect : effects) {
-                    String str = OyVey.potionManager.getColoredPotionString(potionEffect);
+                    String str = uop.potionManager.getColoredPotionString(potionEffect);
                     i += 10;
                     this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (height - 2 - i), potionEffect.getPotion().getLiquidColor(), true);
                 }
             }
             if (this.speed.getValue().booleanValue()) {
-                String str = grayString + "Speed " + ChatFormatting.WHITE + OyVey.speedManager.getSpeedKpH() + " km/h";
+                String str = grayString + "Speed " + ChatFormatting.WHITE + uop.speedManager.getSpeedKpH() + " km/h";
                 i += 10;
                 this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (height - 2 - i), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                 counter1[0] = counter1[0] + 1;
@@ -173,13 +172,13 @@ public class HUD extends Module {
                 counter1[0] = counter1[0] + 1;
             }
             if (this.tps.getValue().booleanValue()) {
-                String str = grayString + "TPS " + ChatFormatting.WHITE + OyVey.serverManager.getTPS();
+                String str = grayString + "TPS " + ChatFormatting.WHITE + uop.serverManager.getTPS();
                 i += 10;
                 this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (height - 2 - i), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                 counter1[0] = counter1[0] + 1;
             }
             String fpsText = grayString + "FPS " + ChatFormatting.WHITE + Minecraft.debugFPS;
-            String str1 = grayString + "Ping " + ChatFormatting.WHITE + OyVey.serverManager.getPing();
+            String str1 = grayString + "Ping " + ChatFormatting.WHITE + uop.serverManager.getPing();
             if (this.renderer.getStringWidth(str1) > this.renderer.getStringWidth(fpsText)) {
                 if (this.ping.getValue().booleanValue()) {
                     i += 10;
@@ -207,12 +206,12 @@ public class HUD extends Module {
             if (this.potions.getValue().booleanValue()) {
                 List<PotionEffect> effects = new ArrayList<>((Minecraft.getMinecraft()).player.getActivePotionEffects());
                 for (PotionEffect potionEffect : effects) {
-                    String str = OyVey.potionManager.getColoredPotionString(potionEffect);
+                    String str = uop.potionManager.getColoredPotionString(potionEffect);
                     this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (2 + i++ * 10), potionEffect.getPotion().getLiquidColor(), true);
                 }
             }
             if (this.speed.getValue().booleanValue()) {
-                String str = grayString + "Speed " + ChatFormatting.WHITE + OyVey.speedManager.getSpeedKpH() + " km/h";
+                String str = grayString + "Speed " + ChatFormatting.WHITE + uop.speedManager.getSpeedKpH() + " km/h";
                 this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (2 + i++ * 10), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                 counter1[0] = counter1[0] + 1;
             }
@@ -222,12 +221,12 @@ public class HUD extends Module {
                 counter1[0] = counter1[0] + 1;
             }
             if (this.tps.getValue().booleanValue()) {
-                String str = grayString + "TPS " + ChatFormatting.WHITE + OyVey.serverManager.getTPS();
+                String str = grayString + "TPS " + ChatFormatting.WHITE + uop.serverManager.getTPS();
                 this.renderer.drawString(str, (width - this.renderer.getStringWidth(str) - 2), (2 + i++ * 10), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
                 counter1[0] = counter1[0] + 1;
             }
             String fpsText = grayString + "FPS " + ChatFormatting.WHITE + Minecraft.debugFPS;
-            String str1 = grayString + "Ping " + ChatFormatting.WHITE + OyVey.serverManager.getPing();
+            String str1 = grayString + "Ping " + ChatFormatting.WHITE + uop.serverManager.getPing();
             if (this.renderer.getStringWidth(str1) > this.renderer.getStringWidth(fpsText)) {
                 if (this.ping.getValue().booleanValue()) {
                     this.renderer.drawString(str1, (width - this.renderer.getStringWidth(str1) - 2), (2 + i++ * 10), (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (((ClickGui.getInstance()).rainbowModeA.getValue() == ClickGui.rainbowModeArray.Up) ? ColorUtil.rainbow(counter1[0] * (ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB() : ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB()) : this.color, true);
@@ -257,7 +256,7 @@ public class HUD extends Module {
         int hposZ = (int) (mc.player.posZ * nether);
         i = (mc.currentScreen instanceof net.minecraft.client.gui.GuiChat) ? 14 : 0;
         String coordinates = ChatFormatting.WHITE + "XYZ " + ChatFormatting.RESET + (inHell ? (posX + ", " + posY + ", " + posZ + ChatFormatting.WHITE + " [" + ChatFormatting.RESET + hposX + ", " + hposZ + ChatFormatting.WHITE + "]" + ChatFormatting.RESET) : (posX + ", " + posY + ", " + posZ + ChatFormatting.WHITE + " [" + ChatFormatting.RESET + hposX + ", " + hposZ + ChatFormatting.WHITE + "]"));
-        String direction = this.direction.getValue().booleanValue() ? OyVey.rotationManager.getDirection4D(false) : "";
+        String direction = this.direction.getValue().booleanValue() ? uop.rotationManager.getDirection4D(false) : "";
         String coords = this.coords.getValue().booleanValue() ? coordinates : "";
         i += 10;
         if ((ClickGui.getInstance()).rainbow.getValue().booleanValue()) {
@@ -326,8 +325,8 @@ public class HUD extends Module {
 
     public void renderLag() {
         int width = this.renderer.scaledWidth;
-        if (OyVey.serverManager.isServerNotResponding()) {
-            String text = ChatFormatting.RED + "Server not responding " + MathUtil.round((float) OyVey.serverManager.serverRespondingTime() / 1000.0F, 1) + "s.";
+        if (uop.serverManager.isServerNotResponding()) {
+            String text = ChatFormatting.RED + "Server not responding " + MathUtil.round((float) uop.serverManager.serverRespondingTime() / 1000.0F, 1) + "s.";
             this.renderer.drawString(text, width / 2.0F - this.renderer.getStringWidth(text) / 2.0F + 2.0F, 20.0F, this.color, true);
         }
     }

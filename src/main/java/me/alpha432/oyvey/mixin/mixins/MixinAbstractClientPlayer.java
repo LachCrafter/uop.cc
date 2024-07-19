@@ -1,6 +1,5 @@
 package me.alpha432.oyvey.mixin.mixins;
 
-import me.alpha432.oyvey.OyVey;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import me.alpha432.oyvey.features.modules.render.RusherCapes;
 import java.util.UUID;
 import javax.annotation.Nullable;
-import me.alpha432.oyvey.features.command.Command;
+
 import me.alpha432.oyvey.features.modules.render.PlayerTweaks;
 
 @Mixin(value={AbstractClientPlayer.class})

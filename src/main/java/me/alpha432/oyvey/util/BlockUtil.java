@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.util;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.command.Command;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -171,7 +171,7 @@ public class BlockUtil
             sneaking = true;
         }
         if (rotate) {
-            OyVey.rotationManager.lookAtVec3d(hitVec);
+            uop.rotationManager.lookAtVec3d(hitVec);
         }
         BlockUtil.rightClickBlock(neighbour, hitVec, hand, opposite, packet);
         BlockUtil.mc.player.swingArm(EnumHand.MAIN_HAND);

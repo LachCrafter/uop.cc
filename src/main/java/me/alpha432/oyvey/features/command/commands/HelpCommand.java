@@ -1,7 +1,7 @@
 package me.alpha432.oyvey.features.command.commands;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.command.Command;
 
 public class HelpCommand
@@ -13,8 +13,8 @@ public class HelpCommand
     @Override
     public void execute(String[] commands) {
         HelpCommand.sendMessage("Commands: ");
-        for (Command command : OyVey.commandManager.getCommands()) {
-            HelpCommand.sendMessage(ChatFormatting.GRAY + OyVey.commandManager.getPrefix() + command.getName());
+        for (Command command : uop.commandManager.getCommands()) {
+            HelpCommand.sendMessage(ChatFormatting.GRAY + uop.commandManager.getPrefix() + command.getName());
         }
     }
 }

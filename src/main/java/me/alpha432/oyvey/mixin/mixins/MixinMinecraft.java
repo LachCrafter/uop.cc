@@ -1,6 +1,6 @@
 package me.alpha432.oyvey.mixin.mixins;
 
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.KeyEvent;
 import me.alpha432.oyvey.features.modules.player.MultiTask;
 import net.minecraft.client.Minecraft;
@@ -38,9 +38,9 @@ public abstract class MixinMinecraft {
     }
 
     private void unload() {
-        OyVey.LOGGER.info("Initiated client shutdown.");
-        OyVey.onUnload();
-        OyVey.LOGGER.info("Finished client shutdown.");
+        uop.LOGGER.info("Initiated client shutdown.");
+        uop.onUnload();
+        uop.LOGGER.info("Finished client shutdown.");
     }
 
     @Redirect(method = {"sendClickBlockToController"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;isHandActive()Z"))

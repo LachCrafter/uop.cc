@@ -2,7 +2,7 @@ package me.alpha432.oyvey.manager;
 
 import com.google.common.base.Strings;
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.*;
 import me.alpha432.oyvey.features.Feature;
 import me.alpha432.oyvey.features.command.Command;
@@ -43,12 +43,12 @@ public class EventManager extends Feature {
     @SubscribeEvent
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (!fullNullCheck() && (event.getEntity().getEntityWorld()).isRemote && event.getEntityLiving().equals(mc.player)) {
-            OyVey.inventoryManager.update();
-            OyVey.moduleManager.onUpdate();
+            uop.inventoryManager.update();
+            uop.moduleManager.onUpdate();
             if ((HUD.getInstance()).renderingMode.getValue() == HUD.RenderingMode.Length) {
-                OyVey.moduleManager.sortModules(true);
+                uop.moduleManager.sortModules(true);
             } else {
-                OyVey.moduleManager.sortModulesABC();
+                uop.moduleManager.sortModulesABC();
             }
         }
     }
@@ -56,19 +56,19 @@ public class EventManager extends Feature {
     @SubscribeEvent
     public void onClientConnect(FMLNetworkEvent.ClientConnectedToServerEvent event) {
         this.logoutTimer.reset();
-        OyVey.moduleManager.onLogin();
+        uop.moduleManager.onLogin();
     }
 
     @SubscribeEvent
     public void onClientDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
-        OyVey.moduleManager.onLogout();
+        uop.moduleManager.onLogout();
     }
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (fullNullCheck())
             return;
-        OyVey.moduleManager.onTick();
+        uop.moduleManager.onTick();
         for (EntityPlayer player : mc.world.playerEntities) {
             if (player == null || player.getHealth() > 0.0F)
                 continue;
@@ -82,13 +82,13 @@ public class EventManager extends Feature {
         if (fullNullCheck())
             return;
         if (event.getStage() == 0) {
-            OyVey.speedManager.updateValues();
-            OyVey.rotationManager.updateRotations();
-            OyVey.positionManager.updatePosition();
+            uop.speedManager.updateValues();
+            uop.rotationManager.updateRotations();
+            uop.positionManager.updatePosition();
         }
         if (event.getStage() == 1) {
-            OyVey.rotationManager.restoreRotations();
-            OyVey.positionManager.restorePosition();
+            uop.rotationManager.restoreRotations();
+            uop.positionManager.restorePosition();
         }
     }
 
@@ -96,7 +96,7 @@ public class EventManager extends Feature {
     public void onPacketReceive(PacketEvent.Receive event) {
         if (event.getStage() != 0)
             return;
-        OyVey.serverManager.onPacketReceived();
+        uop.serverManager.onPacketReceived();
         if (event.getPacket() instanceof SPacketEntityStatus) {
             SPacketEntityStatus packet = event.getPacket();
             if (packet.getOpCode() == 35 && packet.getEntity(mc.world) instanceof EntityPlayer) {
@@ -132,7 +132,7 @@ public class EventManager extends Feature {
                     });
         }
         if (event.getPacket() instanceof net.minecraft.network.play.server.SPacketTimeUpdate)
-            OyVey.serverManager.update();
+            uop.serverManager.update();
     }
 
     @SubscribeEvent
@@ -148,7 +148,7 @@ public class EventManager extends Feature {
         GlStateManager.disableDepth();
         GlStateManager.glLineWidth(1.0F);
         Render3DEvent render3dEvent = new Render3DEvent(event.getPartialTicks());
-        OyVey.moduleManager.onRender3D(render3dEvent);
+        uop.moduleManager.onRender3D(render3dEvent);
         GlStateManager.glLineWidth(1.0F);
         GlStateManager.shadeModel(7424);
         GlStateManager.disableBlend();
@@ -167,7 +167,7 @@ public class EventManager extends Feature {
     @SubscribeEvent
     public void renderHUD(RenderGameOverlayEvent.Post event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
-            OyVey.textManager.updateResolution();
+            uop.textManager.updateResolution();
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
@@ -175,7 +175,7 @@ public class EventManager extends Feature {
         if (event.getType().equals(RenderGameOverlayEvent.ElementType.TEXT)) {
             ScaledResolution resolution = new ScaledResolution(mc);
             Render2DEvent render2DEvent = new Render2DEvent(event.getPartialTicks(), resolution);
-            OyVey.moduleManager.onRender2D(render2DEvent);
+            uop.moduleManager.onRender2D(render2DEvent);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
@@ -183,7 +183,7 @@ public class EventManager extends Feature {
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (Keyboard.getEventKeyState())
-            OyVey.moduleManager.onKeyPressed(Keyboard.getEventKey());
+            uop.moduleManager.onKeyPressed(Keyboard.getEventKey());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -193,7 +193,7 @@ public class EventManager extends Feature {
             try {
                 mc.ingameGUI.getChatGUI().addToSentMessages(event.getMessage());
                 if (event.getMessage().length() > 1) {
-                    OyVey.commandManager.executeCommand(event.getMessage().substring(Command.getCommandPrefix().length() - 1));
+                    uop.commandManager.executeCommand(event.getMessage().substring(Command.getCommandPrefix().length() - 1));
                 } else {
                     Command.sendMessage("Please enter a command.");
                 }

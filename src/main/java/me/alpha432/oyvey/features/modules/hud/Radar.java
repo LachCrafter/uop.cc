@@ -7,10 +7,8 @@ import me.alpha432.oyvey.util.RenderUtil;
 import me.alpha432.oyvey.util.ColorUtil;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import org.lwjgl.opengl.Display;
 import me.alpha432.oyvey.features.modules.client.ClickGui;
-import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.uop;
 
 
 import java.awt.Color;
@@ -47,7 +45,7 @@ public class Radar extends Module {
             int differenceX = (int)Math.floor(mc.player.posX) - (int)Math.floor(player.posX);
             int differenceY = (int)Math.floor(mc.player.posZ) - (int)Math.floor(player.posZ);
             if ((Math.abs(differenceX) + Math.abs(differenceY)) < 49) {
-                RenderUtil.drawRect(x + 50 + differenceX, y + 50 + differenceY, x + 51 + differenceX, y + 51 + differenceY, OyVey.friendManager.isFriend(player) ? ColorUtil.toRGBA(85, 255, 255) : ColorUtil.toRGBA(maincolor));
+                RenderUtil.drawRect(x + 50 + differenceX, y + 50 + differenceY, x + 51 + differenceX, y + 51 + differenceY, uop.friendManager.isFriend(player) ? ColorUtil.toRGBA(85, 255, 255) : ColorUtil.toRGBA(maincolor));
             }
         }
         
