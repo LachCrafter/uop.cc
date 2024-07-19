@@ -12,8 +12,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-public class FutureEditor extends Module {
-    private static FutureEditor INSTANCE = new FutureEditor();
+public class FCAIALM extends Module {
+    private static FCAIALM INSTANCE = new FCAIALM();
     enum CAMode {None, AP, One, Default}
     enum SurroundMode {AntiDie, AutoObsidian, Surround, Default}
     Setting<CAMode> camode = register(new Setting("CA", CAMode.Default));
@@ -28,8 +28,8 @@ public class FutureEditor extends Module {
     boolean APnothing = true;
     Timer APtimer = new Timer();
 
-    public FutureEditor() {
-        super("FutureEditor", "very cool", Category.COMBAT, true, false, false);
+    public FCAIALM() {
+        super("FCAIALM", "very cool", Category.COMBAT, true, false, false);
         this.setInstance();
     }
 
@@ -136,9 +136,9 @@ public class FutureEditor extends Module {
         return text;
     }
 
-    public static FutureEditor getINSTANCE() {
+    public static FCAIALM getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new FutureEditor();
+            INSTANCE = new FCAIALM();
         }
         return INSTANCE;
     }

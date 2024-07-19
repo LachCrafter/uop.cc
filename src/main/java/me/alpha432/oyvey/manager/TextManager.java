@@ -1,12 +1,12 @@
 package me.alpha432.oyvey.manager;
 
+import me.alpha432.oyvey.features.modules.combat.FCAIALM;
 import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.Feature;
 import me.alpha432.oyvey.features.gui.font.CustomFont;
 import me.alpha432.oyvey.features.modules.client.FontMod;
 import me.alpha432.oyvey.util.Timer;
 import net.minecraft.util.math.MathHelper;
-import me.alpha432.oyvey.features.modules.combat.FutureEditor;
 import me.alpha432.oyvey.features.modules.misc.AllCaps;
 
 import java.awt.*;
@@ -38,7 +38,7 @@ public class TextManager
     }
 
     public float drawString(String text, float x, float y, int color, boolean shadow) {
-        text = FutureEditor.getINSTANCE().replaceWithAliases(text);
+        text = FCAIALM.getINSTANCE().replaceWithAliases(text);
         text = AllCaps.getINSTANCE().changeCaps(text);
         if (uop.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
             if (shadow) {
@@ -51,7 +51,7 @@ public class TextManager
     }
 
     public int getStringWidth(String text) {
-        text = FutureEditor.getINSTANCE().replaceWithAliases(text);
+        text = FCAIALM.getINSTANCE().replaceWithAliases(text);
         text = AllCaps.getINSTANCE().changeCaps(text);
         if (uop.moduleManager.isModuleEnabled(FontMod.getInstance().getName())) {
             return this.customFont.getStringWidth(text);
