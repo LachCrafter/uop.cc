@@ -8,12 +8,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
-@Mod(modid = "oyvey", name = "OyVey", version = "0.0.3")
+@Mod(modid = "uop.cc", name = "uop.cc", version = "2.0")
 public class OyVey {
-    public static final String MODID = "oyvey";
-    public static final String MODNAME = "OyVey";
-    public static final String MODVER = "0.0.3";
-    public static final Logger LOGGER = LogManager.getLogger("OyVey");
+    public static final String MODID = "uop.cc";
+    public static final String MODNAME = "uop.cc";
+    public static final String MODVER = "2.0";
+    public static final Logger LOGGER = LogManager.getLogger("uop.cc");
     public static CommandManager commandManager;
     public static FriendManager friendManager;
     public static ModuleManager moduleManager;
@@ -40,7 +40,7 @@ public class OyVey {
     }
 
     public static void load() {
-        LOGGER.info("\n\nLoading OyVey by Alpha432");
+        LOGGER.info("\n\nInitialising the uop");
         unloaded = false;
         if (reloadManager != null) {
             reloadManager.unload();
@@ -70,7 +70,7 @@ public class OyVey {
         LOGGER.info("EventManager loaded.");
         textManager.init(true);
         moduleManager.onLoad();
-        LOGGER.info("OyVey successfully loaded!\n");
+        LOGGER.info("uop.cc successfully initialised!\n");
     }
 
     public static void unload(boolean unload) {
@@ -95,7 +95,7 @@ public class OyVey {
         inventoryManager = null;
         moduleManager = null;
         textManager = null;
-        LOGGER.info("OyVey unloaded!\n");
+        LOGGER.info("uop.cc unloaded!\n");
     }
 
     public static void reload() {
@@ -107,7 +107,7 @@ public class OyVey {
         if (!unloaded) {
             eventManager.onUnload();
             moduleManager.onUnload();
-            configManager.saveConfig(OyVey.configManager.config.replaceFirst("oyvey/", ""));
+            configManager.saveConfig(OyVey.configManager.config.replaceFirst("uop/", ""));
             moduleManager.onUnloadPost();
             unloaded = true;
         }
@@ -115,7 +115,6 @@ public class OyVey {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        LOGGER.info("I am gona gas you kike - Alpha432");
     }
 
     @Mod.EventHandler
