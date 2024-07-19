@@ -2,10 +2,10 @@ package me.alpha432.oyvey.features.modules.movement;
 
 import me.alpha432.oyvey.features.modules.Module;
 
-public class VanillaBhop extends Module {
+public class HorizonBhop extends Module {
 
-    public VanillaBhop() {
-        super("VanillaBhop", "horizon anarchy :D :D :D", Category.MOVEMENT, true, false, false);
+    public HorizonBhop() {
+        super("HorizonBhop", "horizon anarchy :D :D :D", Category.MOVEMENT, true, false, false);
     }
 
     @Override

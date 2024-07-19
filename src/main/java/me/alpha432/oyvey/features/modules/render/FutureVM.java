@@ -3,8 +3,8 @@ package me.alpha432.oyvey.features.modules.render;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 
-public class ViewModel extends Module {
-    private static ViewModel INSTANCE = new ViewModel();
+public class FutureVM extends Module {
+    private static FutureVM INSTANCE = new FutureVM();
     
     public Setting<Float> TranslateX = this.register(new Setting<Float>("TranslateX", 0.0f, -3.0f, 3.0f));
     public Setting<Float> TranslateY = this.register(new Setting<Float>("TranslateY", 0.0f, -3.0f, 3.0f));
@@ -16,16 +16,16 @@ public class ViewModel extends Module {
     public Setting<Float> RotateY = this.register(new Setting<Float>("RotateY", 0.0f, -180.0f, 180.0f));
     public Setting<Float> RotateZ = this.register(new Setting<Float>("RotateZ", 0.0f, -180.0f, 180.0f));
     
-    public ViewModel() {
-        super("ViewModel", "Changes your ViewModel", Module.Category.RENDER, false, false, false);
+    public FutureVM() {
+        super("FutureVM", "Pasting Future (bananas)", Module.Category.RENDER, false, false, false);
         this.setInstance();
     }
     
     
 
-    public static ViewModel getINSTANCE() {
+    public static FutureVM getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new ViewModel();
+            INSTANCE = new FutureVM();
         }
         return INSTANCE;
     }

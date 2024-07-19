@@ -37,7 +37,7 @@ public class ModuleManager
     public void init() {
         //hud
         this.modules.add(new ArmourHUD());
-        this.modules.add(new ArrayList());
+        this.modules.add(new ArrayListJ());
         this.modules.add(new BetterPotions());
         this.modules.add(new Coords());
         this.modules.add(new ConnectionInfo());
@@ -62,7 +62,7 @@ public class ModuleManager
         this.modules.add(new CallBackup());
         this.modules.add(new CAMessage());
         this.modules.add(new CrystalPredict());
-        this.modules.add(new FutureEditor());
+        this.modules.add(new FCAIALM());
         this.modules.add(new Selftrap());
         
         // misc
@@ -81,7 +81,7 @@ public class ModuleManager
         this.modules.add(new XormiosModule());
         
         // movement
-        this.modules.add(new VanillaBhop());
+        this.modules.add(new HorizonBhop());
         this.modules.add(new InstantSpeed());
         this.modules.add(new LagBack());
         this.modules.add(new NoClip());
@@ -103,7 +103,7 @@ public class ModuleManager
         this.modules.add(new AA());
         this.modules.add(new ArrowESP());
         this.modules.add(new AspectRatio());
-        this.modules.add(new GUIBackground());
+        this.modules.add(new Background());
         this.modules.add(new BlackBars());
         this.modules.add(new BlockHighlight());
         this.modules.add(new BurrowESP());
@@ -111,7 +111,7 @@ public class ModuleManager
         this.modules.add(new DeathEffects());
         this.modules.add(new DebugCrosshair());
         this.modules.add(new ESP());
-        this.modules.add(new ViewModel());
+        this.modules.add(new FutureVM());
         this.modules.add(new GlintTweaks());
         this.modules.add(new HandChams());
         this.modules.add(new HoleESP());

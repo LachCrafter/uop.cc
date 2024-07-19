@@ -3,8 +3,8 @@ package me.alpha432.oyvey.features.modules.render;
 import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 
-public class GUIBackground extends Module {
-    private static GUIBackground INSTANCE = new GUIBackground();
+public class Background extends Module {
+    private static Background INSTANCE = new Background();
     public Setting<Boolean> vanilla = this.register(new Setting<Boolean>("Vanilla", false));
     public Setting<Boolean> gradient = this.register(new Setting<Boolean>("Gradient", false));
     public Setting<Integer> red = this.register(new Setting<Integer>("TopRed", 255, 0, 255, v -> gradient.getValue()));
@@ -16,14 +16,14 @@ public class GUIBackground extends Module {
     public Setting<Integer> blue2 = this.register(new Setting<Integer>("BottomBlue", 0, 0, 255, v -> gradient.getValue()));
     public Setting<Integer> alpha2 = this.register(new Setting<Integer>("BottomAlpha", 0, 0, 255, v -> gradient.getValue()));
     
-    public GUIBackground() {
-        super("GUIBackground", "changes minecraft background", Module.Category.RENDER, false, false, false);
+    public Background() {
+        super("Background", "changes minecraft background", Module.Category.RENDER, false, false, false);
         this.setInstance();
     }
 
-    public static GUIBackground getINSTANCE() {
+    public static Background getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new GUIBackground();
+            INSTANCE = new Background();
         }
         return INSTANCE;
     }
