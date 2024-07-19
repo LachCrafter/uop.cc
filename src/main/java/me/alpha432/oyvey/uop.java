@@ -74,7 +74,7 @@ public class uop {
     }
 
     public static void unload(boolean unload) {
-        LOGGER.info("\n\nUnloading OyVey by Alpha432");
+        LOGGER.info("\n\nUnloading uop");
         if (unload) {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
@@ -123,4 +123,3 @@ public class uop {
         uop.load();
     }
 }
-
