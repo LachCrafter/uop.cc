@@ -4,7 +4,7 @@ import me.alpha432.oyvey.features.modules.client.ClickGui;
 import me.alpha432.oyvey.features.modules.render.HandChams;
 import me.alpha432.oyvey.features.modules.render.SmallShield;
 import me.alpha432.oyvey.features.modules.render.NoSway;
-import me.alpha432.oyvey.features.modules.render.FutureVM;
+import me.alpha432.oyvey.features.modules.render.ViewModel;
 import me.alpha432.oyvey.features.modules.render.OldAnimations;
 import me.alpha432.oyvey.util.ColorUtil;
 import net.minecraft.client.Minecraft;
@@ -22,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.init.Items;
 import net.minecraft.client.entity.EntityPlayerSP;
 
 @Mixin(value = {ItemRenderer.class})
@@ -57,15 +56,15 @@ public abstract class MixinItemRenderer {
             float yOffset = 0.0f;
             this.injection = false;
             int vmFactor = 1;
-            if (FutureVM.getINSTANCE().isOn()) { // this is really stupid and very dumb but it works and i cba to learn how to properly do gl so ¯\_(ツ)_/¯
+            if (ViewModel.getINSTANCE().isOn()) { // this is really stupid and very dumb but it works and i cba to learn how to properly do gl so ¯\_(ツ)_/¯
                 if (hand == EnumHand.MAIN_HAND) {
-                    GlStateManager.scale(FutureVM.getINSTANCE().ScaleX.getValue(), FutureVM.getINSTANCE().ScaleY.getValue(), FutureVM.getINSTANCE().ScaleZ.getValue());
-                    GlStateManager.rotate(FutureVM.getINSTANCE().RotateX.getValue() + 180.0f, 1.0f, 0.0f, 0.0f);
-                    GlStateManager.rotate(FutureVM.getINSTANCE().RotateY.getValue() + 180.0f, 0.0f, 1.0f, 0.0f);
-                    GlStateManager.rotate(FutureVM.getINSTANCE().RotateZ.getValue() + 180.0f, 0.0f, 0.0f, 1.0f);
-                    GlStateManager.translate(FutureVM.getINSTANCE().TranslateX.getValue() * (1 / FutureVM.getINSTANCE().ScaleX.getValue()) * -1, FutureVM.getINSTANCE().TranslateY.getValue() * (1 / FutureVM.getINSTANCE().ScaleY.getValue()), FutureVM.getINSTANCE().TranslateZ.getValue() * (1 / FutureVM.getINSTANCE().ScaleZ.getValue()));
+                    GlStateManager.scale(ViewModel.getINSTANCE().ScaleX.getValue(), ViewModel.getINSTANCE().ScaleY.getValue(), ViewModel.getINSTANCE().ScaleZ.getValue());
+                    GlStateManager.rotate(ViewModel.getINSTANCE().RotateX.getValue() + 180.0f, 1.0f, 0.0f, 0.0f);
+                    GlStateManager.rotate(ViewModel.getINSTANCE().RotateY.getValue() + 180.0f, 0.0f, 1.0f, 0.0f);
+                    GlStateManager.rotate(ViewModel.getINSTANCE().RotateZ.getValue() + 180.0f, 0.0f, 0.0f, 1.0f);
+                    GlStateManager.translate(ViewModel.getINSTANCE().TranslateX.getValue() * (1 / ViewModel.getINSTANCE().ScaleX.getValue()) * -1, ViewModel.getINSTANCE().TranslateY.getValue() * (1 / ViewModel.getINSTANCE().ScaleY.getValue()), ViewModel.getINSTANCE().TranslateZ.getValue() * (1 / ViewModel.getINSTANCE().ScaleZ.getValue()));
                 } else {
-                    GlStateManager.translate(FutureVM.getINSTANCE().TranslateX.getValue() * (1 / FutureVM.getINSTANCE().ScaleX.getValue()) * 2, 0, 0);
+                    GlStateManager.translate(ViewModel.getINSTANCE().TranslateX.getValue() * (1 / ViewModel.getINSTANCE().ScaleX.getValue()) * 2, 0, 0);
                 }
             }
             

@@ -8,12 +8,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class TotemHUD extends Module {
+public class Totems extends Module {
     private static final ItemStack totem = new ItemStack(Items.TOTEM_OF_UNDYING);
     public Setting<Boolean> show0 = register(new Setting("Show0", true));
 
-    public TotemHUD() {
-        super("TotemHUD", "shows how many totems you have", Category.HUD, true, false, false);
+    public Totems() {
+        super("Totems", "shows how many totems you have", Category.HUD, true, false, false);
     }
 
     public void onRender2D(Render2DEvent event) {

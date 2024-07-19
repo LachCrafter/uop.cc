@@ -4,18 +4,16 @@ import me.alpha432.oyvey.features.modules.Module;
 import me.alpha432.oyvey.features.setting.Setting;
 import me.alpha432.oyvey.event.events.PacketEvent;
 import me.alpha432.oyvey.util.Timer;
-import net.minecraft.network.play.client.CPacketHeldItemChange;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
 import net.minecraft.network.play.client.CPacketUseEntity;
-import net.minecraft.network.play.client.CPacketClickWindow;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-public class FCAIALM extends Module {
-    private static FCAIALM INSTANCE = new FCAIALM();
+public class FutureEditor extends Module {
+    private static FutureEditor INSTANCE = new FutureEditor();
     enum CAMode {None, AP, One, Default}
     enum SurroundMode {AntiDie, AutoObsidian, Surround, Default}
     Setting<CAMode> camode = register(new Setting("CA", CAMode.Default));
@@ -30,8 +28,8 @@ public class FCAIALM extends Module {
     boolean APnothing = true;
     Timer APtimer = new Timer();
 
-    public FCAIALM() {
-        super("FCAIALM", "very cool", Category.COMBAT, true, false, false);
+    public FutureEditor() {
+        super("FutureEditor", "very cool", Category.COMBAT, true, false, false);
         this.setInstance();
     }
 
@@ -138,9 +136,9 @@ public class FCAIALM extends Module {
         return text;
     }
 
-    public static FCAIALM getINSTANCE() {
+    public static FutureEditor getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new FCAIALM();
+            INSTANCE = new FutureEditor();
         }
         return INSTANCE;
     }

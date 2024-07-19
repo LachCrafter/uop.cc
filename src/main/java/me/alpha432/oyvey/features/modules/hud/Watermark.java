@@ -13,7 +13,7 @@ public class Watermark extends Module {
     public Setting<Integer> posY = register(new Setting("Y", 2, 0, 500));
 
     public Watermark() {
-        super("Watermark", "says hi to you :D", Category.HUD, true, false, false);
+        super("Watermark", "Watermark from the client.", Category.HUD, true, false, false);
     }
 
     public void onRender2D(Render2DEvent event) {

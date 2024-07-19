@@ -41,7 +41,7 @@ public class ClickGui
     private OyVeyGui click;
 
     public ClickGui() {
-        super("Client", "Client settings", Module.Category.CLIENT, true, false, false);
+        super("ClickGUI", "Client settings", Module.Category.CLIENT, true, false, false);
         this.setInstance();
     }
 

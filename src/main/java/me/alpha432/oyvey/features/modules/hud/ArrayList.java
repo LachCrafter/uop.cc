@@ -8,14 +8,14 @@ import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.features.modules.client.ClickGui;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-public class ArrayListJ extends Module {
+public class ArrayList extends Module {
     public enum RenderMode {Left, Down, Up}
     public Setting<RenderMode> rendermode = register(new Setting("Render", RenderMode.Left));
     public enum ColorMode {Category, Sync, Future}
     public Setting<ColorMode> colormode = register(new Setting("Color", ColorMode.Category));
     public Setting<Boolean> prefix = register(new Setting("Prefix", false));
 
-    public ArrayListJ() {
+    public ArrayList() {
         super("ArrayList", "renders your current modules", Category.HUD, true, false, false);
     }
 

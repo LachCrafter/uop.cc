@@ -19,7 +19,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -30,21 +29,21 @@ import java.util.stream.Collectors;
 
 public class ModuleManager
         extends Feature {
-    public ArrayList<Module> modules = new ArrayList();
-    public List<Module> sortedModules = new ArrayList<Module>();
-    public List<String> sortedModulesABC = new ArrayList<String>();
+    public java.util.ArrayList<Module> modules = new java.util.ArrayList();
+    public List<Module> sortedModules = new java.util.ArrayList<Module>();
+    public List<String> sortedModulesABC = new java.util.ArrayList<String>();
     public Animation animationThread;
 
     public void init() {
         //hud
         this.modules.add(new ArmourHUD());
-        this.modules.add(new ArrayListJ());
+        this.modules.add(new ArrayList());
         this.modules.add(new BetterPotions());
         this.modules.add(new Coords());
         this.modules.add(new ConnectionInfo());
         this.modules.add(new Dashboard());
         this.modules.add(new Radar());
-        this.modules.add(new TotemHUD());
+        this.modules.add(new Totems());
         this.modules.add(new Watermark());
         this.modules.add(new Welcomer());
 
@@ -63,7 +62,7 @@ public class ModuleManager
         this.modules.add(new CallBackup());
         this.modules.add(new CAMessage());
         this.modules.add(new CrystalPredict());
-        this.modules.add(new FCAIALM());
+        this.modules.add(new FutureEditor());
         this.modules.add(new Selftrap());
         
         // misc
@@ -82,7 +81,7 @@ public class ModuleManager
         this.modules.add(new XormiosModule());
         
         // movement
-        this.modules.add(new HorizonBhop());
+        this.modules.add(new VanillaBhop());
         this.modules.add(new InstantSpeed());
         this.modules.add(new LagBack());
         this.modules.add(new NoClip());
@@ -104,7 +103,7 @@ public class ModuleManager
         this.modules.add(new AA());
         this.modules.add(new ArrowESP());
         this.modules.add(new AspectRatio());
-        this.modules.add(new Background());
+        this.modules.add(new GUIBackground());
         this.modules.add(new BlackBars());
         this.modules.add(new BlockHighlight());
         this.modules.add(new BurrowESP());
@@ -112,11 +111,10 @@ public class ModuleManager
         this.modules.add(new DeathEffects());
         this.modules.add(new DebugCrosshair());
         this.modules.add(new ESP());
-        this.modules.add(new FutureVM());
+        this.modules.add(new ViewModel());
         this.modules.add(new GlintTweaks());
         this.modules.add(new HandChams());
         this.modules.add(new HoleESP());
-        this.modules.add(new IHateYou());
         this.modules.add(new ItemScale());
         this.modules.add(new LogSpots());
         this.modules.add(new NoSway());
@@ -192,8 +190,8 @@ public class ModuleManager
         return null;
     }
 
-    public ArrayList<Module> getEnabledModules() {
-        ArrayList<Module> enabledModules = new ArrayList<Module>();
+    public java.util.ArrayList<Module> getEnabledModules() {
+        java.util.ArrayList<Module> enabledModules = new java.util.ArrayList<Module>();
         for (Module module : this.modules) {
             if (!module.isEnabled()) continue;
             enabledModules.add(module);
@@ -201,8 +199,8 @@ public class ModuleManager
         return enabledModules;
     }
 
-    public ArrayList<String> getEnabledModulesName() {
-        ArrayList<String> enabledModules = new ArrayList<String>();
+    public java.util.ArrayList<String> getEnabledModulesName() {
+        java.util.ArrayList<String> enabledModules = new java.util.ArrayList<String>();
         for (Module module : this.modules) {
             if (!module.isEnabled() || !module.isDrawn()) continue;
             enabledModules.add(module.getFullArrayString());
@@ -210,8 +208,8 @@ public class ModuleManager
         return enabledModules;
     }
 
-    public ArrayList<Module> getModulesByCategory(Module.Category category) {
-        ArrayList<Module> modulesCategory = new ArrayList<Module>();
+    public java.util.ArrayList<Module> getModulesByCategory(Module.Category category) {
+        java.util.ArrayList<Module> modulesCategory = new java.util.ArrayList<Module>();
         this.modules.forEach(module -> {
             if (module.getCategory() == category) {
                 modulesCategory.add(module);
@@ -250,7 +248,7 @@ public class ModuleManager
     }
 
     public void sortModulesABC() {
-        this.sortedModulesABC = new ArrayList<String>(this.getEnabledModulesName());
+        this.sortedModulesABC = new java.util.ArrayList<String>(this.getEnabledModulesName());
         this.sortedModulesABC.sort(String.CASE_INSENSITIVE_ORDER);
     }
 

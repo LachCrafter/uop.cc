@@ -6,6 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import org.apache.logging.log4j.spi.LoggerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class PotionManager
         }
         return array;
     }
+
 
     public String getPotionString(PotionEffect effect) {
         Potion potion = effect.getPotion();
