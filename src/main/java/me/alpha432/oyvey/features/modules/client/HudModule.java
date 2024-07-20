@@ -7,7 +7,7 @@ import me.alpha432.oyvey.features.modules.Module;
 
 public class HudModule extends Module {
     public HudModule() {
-        super("LegacyHud", "hud", Category.CLIENT, true, false, false);
+        super("LegacyHud", "HUD Elements rendered on your screen", Category.CLIENT, true, false, false);
     }
 
     @Override public void onRender2D(Render2DEvent event) {
