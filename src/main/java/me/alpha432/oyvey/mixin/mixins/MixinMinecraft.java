@@ -3,13 +3,16 @@ package me.alpha432.oyvey.mixin.mixins;
 import me.alpha432.oyvey.uop;
 import me.alpha432.oyvey.event.events.KeyEvent;
 import me.alpha432.oyvey.features.modules.player.MultiTask;
+import me.alpha432.oyvey.util.LoggerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.crash.CrashReport;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = {Minecraft.class})
 public abstract class MixinMinecraft {
+    @Shadow @Final public static LoggerUtil LOGGER;
+
     @Inject(method = {"shutdownMinecraftApplet"}, at = {@At(value = "HEAD")})
     private void stopClient(CallbackInfo callbackInfo) {
         this.unload();
@@ -38,9 +43,9 @@ public abstract class MixinMinecraft {
     }
 
     private void unload() {
-        uop.LOGGER.info("Initiated client shutdown.");
+        LoggerUtil.info("Initiated client shutdown.");
         uop.onUnload();
-        uop.LOGGER.info("Finished client shutdown.");
+        LoggerUtil.info("Finished client shutdown.");
     }
 
     @Redirect(method = {"sendClickBlockToController"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;isHandActive()Z"))

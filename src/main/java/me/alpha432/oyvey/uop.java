@@ -4,16 +4,15 @@ import me.alpha432.oyvey.manager.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
+
+import static me.alpha432.oyvey.util.LoggerUtil.info;
 
 @Mod(modid = "uop.cc", name = "uop.cc", version = "2.0")
 public class uop {
     public static final String MODID = "uop.cc";
     public static final String MODNAME = "uop.cc";
     public static final String MODVER = "2.0";
-    public static final Logger LOGGER = LogManager.getLogger("uop.cc");
     public static CommandManager commandManager;
     public static FriendManager friendManager;
     public static ModuleManager moduleManager;
@@ -40,7 +39,7 @@ public class uop {
     }
 
     public static void load() {
-        LOGGER.info("\n\nInitialising the uop");
+        info("\n\nInitialising the uop");
         unloaded = false;
         if (reloadManager != null) {
             reloadManager.unload();
@@ -62,19 +61,19 @@ public class uop {
         positionManager = new PositionManager();
         configManager = new ConfigManager();
         holeManager = new HoleManager();
-        LOGGER.info("Managers loaded.");
+        info("Managers loaded.");
         moduleManager.init();
-        LOGGER.info("Modules loaded.");
+        info("Modules loaded.");
         configManager.init();
         eventManager.init();
-        LOGGER.info("EventManager loaded.");
+        info("EventManager loaded.");
         textManager.init(true);
         moduleManager.onLoad();
-        LOGGER.info("uop.cc successfully initialised!\n");
+        info("uop.cc successfully initialised!\n");
     }
 
     public static void unload(boolean unload) {
-        LOGGER.info("\n\nUnloading uop");
+        info("\n\nUnloading uop");
         if (unload) {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
@@ -95,7 +94,7 @@ public class uop {
         inventoryManager = null;
         moduleManager = null;
         textManager = null;
-        LOGGER.info("uop.cc unloaded!\n");
+        info("uop.cc unloaded!\n");
     }
 
     public static void reload() {

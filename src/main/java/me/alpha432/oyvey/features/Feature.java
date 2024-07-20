@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Feature
         implements Util {
-    public List<Setting> settings = new ArrayList<Setting>();
+    public List<Setting> settings = new ArrayList<>();
     public TextManager renderer = uop.textManager;
     private String name;
 
@@ -92,7 +92,7 @@ public class Feature
     }
 
     public void clearSettings() {
-        this.settings = new ArrayList<Setting>();
+        this.settings = new ArrayList<>();
     }
 }
 

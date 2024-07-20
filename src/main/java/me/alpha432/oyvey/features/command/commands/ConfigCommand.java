@@ -16,7 +16,7 @@ public class ConfigCommand extends Command {
 
     public void execute(String[] commands) {
         if (commands.length == 1) {
-            sendMessage("You`ll find the config files in your gameProfile directory under oyvey/config");
+            sendMessage("You`ll find the config files in your gameProfile directory under uop/config");
             return;
         }
         if (commands.length == 2)
