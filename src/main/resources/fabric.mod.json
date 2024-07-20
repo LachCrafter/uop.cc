@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "uop.cc",
+  "version": "${version}",
+  "name": "uop.cc",
+  "description": "awesome!!",
+  "authors": [
+    "browsky300",
+    "LachCrafter"
+  ],
+  "contact": {
+    "repo": "https://github.com/LachCrafter/uop.cc"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "accessWidener": "uop.accesswidener",
+  "entrypoints": {
+    "client": [
+      "me.alpha432.oyvey.uop"
+    ],
+    "main": [
+      "me.alpha432.oyvey.uop"
+    ]
+  },
+  "mixins": [
+    "uop.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
