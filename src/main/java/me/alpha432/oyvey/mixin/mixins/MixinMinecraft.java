@@ -10,9 +10,7 @@ import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.crash.CrashReport;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -20,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = {Minecraft.class})
 public abstract class MixinMinecraft {
-    @Shadow @Final public static LoggerUtil LOGGER;
 
     @Inject(method = {"shutdownMinecraftApplet"}, at = {@At(value = "HEAD")})
     private void stopClient(CallbackInfo callbackInfo) {
