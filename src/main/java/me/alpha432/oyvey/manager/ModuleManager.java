@@ -18,6 +18,7 @@ import me.alpha432.oyvey.util.Util;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 import org.lwjgl.input.Keyboard;
+import scala.math.Ordering;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -81,6 +82,7 @@ public class ModuleManager
         this.modules.add(new XormiosModule());
         
         // movement
+        this.modules.add(new CornerClip());
         this.modules.add(new HorizonBhop());
         this.modules.add(new InstantSpeed());
         this.modules.add(new LagBack());
