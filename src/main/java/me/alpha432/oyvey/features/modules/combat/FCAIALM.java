@@ -93,7 +93,6 @@ public class FCAIALM extends Module {
     public String replaceWithAliases(String text) {
         if (!isOn()) return text;
 
-        // Update the random values every 500ms (half a second)
         if (updateTimer.passedMs(500)) {
             if (APhasAttacked) {
                 firstNumber = String.valueOf(rand.nextInt(100));
@@ -123,7 +122,6 @@ public class FCAIALM extends Module {
                 case One:
                     return text.replaceAll("\\,.*]", "]");
                 case Beta:
-                    // Only generate latency when APhasAttacked is true
                     String latency = APhasAttacked ? String.format("%.2fms", rand.nextDouble() + 0.1) : "0.00ms";
                     return "AutoCrystal " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + latency + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + firstNumber + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE + secondNumber + ChatFormatting.GRAY + ", " + ChatFormatting.WHITE  + thirdNumber + ChatFormatting.GRAY + "]";
                 default:
@@ -144,9 +142,6 @@ public class FCAIALM extends Module {
             }
         }
 
-        if (text.startsWith("AutoTrap " + ChatFormatting.GRAY + "[")) {
-            return "AutoTrap " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + "0" + ChatFormatting.GRAY + "]";
-        }
 
 
         if (text.startsWith("Future v") && futurebeta.getValue()) {
