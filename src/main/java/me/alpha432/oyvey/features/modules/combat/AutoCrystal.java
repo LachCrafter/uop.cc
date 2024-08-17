@@ -332,6 +332,7 @@ public class AutoCrystal
 
     @SubscribeEvent(priority = EventPriority.HIGH, receiveCanceled = true)
     public void onPacketReceive(PacketEvent.Receive event) {
+
         SPacketSoundEffect packet;
         if (AutoCrystal.fullNullCheck()) {
             return;
@@ -390,6 +391,14 @@ public class AutoCrystal
         } else if (event.getPacket() instanceof SPacketEntityStatus) {
             SPacketEntityStatus packet5 = event.getPacket();
             Entity entity = packet5.getEntity(AutoCrystal.mc.world);
+            if (entity == null) {
+                System.out.println("Entity is null");
+            } else if (!(entity instanceof EntityPlayer)) {
+                System.out.println("Entity is not an instance of EntityPlayer");
+            } else if (this.totemPops == null) {
+                System.out.println("totemPops map is null");
+            }
+
             if (packet5.getOpCode() == 35 && entity instanceof EntityPlayer) {
                 this.totemPops.put((EntityPlayer) entity, new Timer().reset());
             }
