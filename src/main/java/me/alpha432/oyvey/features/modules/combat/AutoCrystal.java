@@ -389,8 +389,9 @@ public class AutoCrystal
             }
         } else if (event.getPacket() instanceof SPacketEntityStatus) {
             SPacketEntityStatus packet5 = event.getPacket();
-            if (packet5.getOpCode() == 35 && packet5.getEntity(AutoCrystal.mc.world) instanceof EntityPlayer) {
-                this.totemPops.put((EntityPlayer) packet5.getEntity(AutoCrystal.mc.world), new Timer().reset());
+            Entity entity = packet5.getEntity(AutoCrystal.mc.world);
+            if (packet5.getOpCode() == 35 && entity instanceof EntityPlayer) {
+                this.totemPops.put((EntityPlayer) entity, new Timer().reset());
             }
         } else if (event.getPacket() instanceof SPacketSoundEffect && (packet = event.getPacket()).getCategory() == SoundCategory.BLOCKS && packet.getSound() == SoundEvents.ENTITY_GENERIC_EXPLODE) {
             BlockPos pos = new BlockPos(packet.getX(), packet.getY(), packet.getZ());
