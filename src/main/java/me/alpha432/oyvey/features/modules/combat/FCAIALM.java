@@ -16,23 +16,27 @@ import java.util.Random;
 
 public class FCAIALM extends Module {
     private static FCAIALM INSTANCE = new FCAIALM();
+
     enum CAMode {None, AP, One, Beta, Default}
     enum SurroundMode {AntiDie, AutoObsidian, Surround, Default}
-    Setting<CAMode> camode = register(new Setting("CA", CAMode.Default));
-    Setting<SurroundMode> surroundmode = register(new Setting("Surround", SurroundMode.Default));
-    Setting<Boolean> doWatermark = register(new Setting("Watermark", false));
-    Setting<String> cWatermark = register(new Setting("W", "Future v2.11.1", v -> doWatermark.getValue()));
-    Setting<Boolean> noinfo = register(new Setting("NoInfo", false));
-    Setting<Boolean> futurebeta = register(new Setting("Future Beta", false));
-    Setting<Boolean> holefillInfo = register(new Setting("HoleFill Info", false));
-    boolean APstringAttacking = true;
-    boolean APhasPlaced = false;
-    boolean APhasAttacked = false;
-    boolean APpacketAttacking = true;
-    boolean APnothing = true;
-    Timer APtimer = new Timer();
-    private Random rand = new Random();
-    private Timer updateTimer = new Timer();
+
+    private final Setting<CAMode> camode = register(new Setting<>("CA", CAMode.Default));
+    private final Setting<SurroundMode> surroundmode = register(new Setting<>("Surround", SurroundMode.Default));
+    private final Setting<Boolean> doWatermark = register(new Setting<>("Watermark", false));
+    private final Setting<String> cWatermark = register(new Setting<>("W", "Future v2.11.1", v -> doWatermark.getValue()));
+    private final Setting<Boolean> noInfo = register(new Setting<>("NoInfo", false));
+    private final Setting<Boolean> futurebeta = register(new Setting<>("Future Beta", false));
+    private final Setting<Boolean> holefillInfo = register(new Setting<>("HoleFill Info", false));
+
+    private boolean APstringAttacking = true;
+    private boolean APhasPlaced = false;
+    private boolean APhasAttacked = false;
+    private boolean APpacketAttacking = true;
+    private boolean APnothing = true;
+
+    private final Timer APtimer = new Timer();
+    private final Random rand = new Random();
+    private final Timer updateTimer = new Timer();
 
     private String firstNumber = "0", secondNumber = "0.0", thirdNumber = "0";
 
@@ -169,4 +173,3 @@ public class FCAIALM extends Module {
         INSTANCE = this;
     }
 }
-
