@@ -10,19 +10,55 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class ConnectionInfo extends Module {
     public enum RenderMode {Up, Down}
-    public Setting<RenderMode> rendermode = register(new Setting("Render", RenderMode.Up));
+
+    private final Setting<RenderMode> rendermode = register(new Setting<>("Render", RenderMode.Up));
 
     public ConnectionInfo() {
-        super("ConnectionInfo", "connection info", Category.HUD, true, false, false);
+        super("ConnectionInfo", "Displays connection info", Category.HUD, true, false, false);
     }
 
+    @Override
     public void onRender2D(Render2DEvent event) {
-        int color = (ClickGui.getInstance().rainbow.getValue() ? ColorUtil.toRGBA(ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue())) : ColorUtil.toRGBA(ClickGui.getInstance().red.getValue(), ClickGui.getInstance().green.getValue(), ClickGui.getInstance().blue.getValue()));
-        String msString = ChatFormatting.WHITE + "" + uop.serverManager.getPing() + ChatFormatting.RESET + " ms";
-        String tpsString = ChatFormatting.WHITE + "" + (int) Math.round(uop.serverManager.getTPS()) + ChatFormatting.RESET + " tps";
-        String lagString = (uop.serverManager.isLagging() ? (ChatFormatting.WHITE + "" + Math.floor(uop.serverManager.serverRespondingTime() / 100.0f) / 10.0f + "s" +  ChatFormatting.RESET + " lag") : "");
-        this.renderer.drawString(msString, this.renderer.scaledWidth - 2 - this.renderer.getStringWidth(msString), (rendermode.getValue() == RenderMode.Up ? 2 : this.renderer.scaledHeight - 10), color, true);
-        this.renderer.drawString(tpsString, this.renderer.scaledWidth - 2 - this.renderer.getStringWidth(tpsString), (rendermode.getValue() == RenderMode.Up ? 11 : this.renderer.scaledHeight - 19), color, true);
-        this.renderer.drawString(lagString, this.renderer.scaledWidth - 2 - this.renderer.getStringWidth(lagString), (rendermode.getValue() == RenderMode.Up ? 20 : this.renderer.scaledHeight - 28), color, true);
+        int color = getColor();
+        String msString = formatMsString();
+        String tpsString = formatTpsString();
+        String lagString = formatLagString();
+
+        drawString(msString, 2, color);
+        drawString(tpsString, 11, color);
+        drawString(lagString, 20, color);
     }
-} 
+
+    private int getColor() {
+        if (ClickGui.getInstance().rainbow.getValue()) {
+            return ColorUtil.toRGBA(ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue()));
+        } else {
+            return ColorUtil.toRGBA(
+                    ClickGui.getInstance().red.getValue(),
+                    ClickGui.getInstance().green.getValue(),
+                    ClickGui.getInstance().blue.getValue()
+            );
+        }
+    }
+
+    private String formatMsString() {
+        return ChatFormatting.WHITE + "" + uop.serverManager.getPing() + ChatFormatting.RESET + " ms";
+    }
+
+    private String formatTpsString() {
+        return ChatFormatting.WHITE + "" + Math.round(uop.serverManager.getTPS()) + ChatFormatting.RESET + " tps";
+    }
+
+    private String formatLagString() {
+        if (uop.serverManager.isLagging()) {
+            return ChatFormatting.WHITE + "" + Math.floor(uop.serverManager.serverRespondingTime() / 100.0f) / 10.0f + "s" + ChatFormatting.RESET + " lag";
+        }
+        return "";
+    }
+
+    private void drawString(String text, int yOffset, int color) {
+        int yPos = rendermode.getValue() == RenderMode.Up ? yOffset : this.renderer.scaledHeight - 10 - (yOffset - 2);
+        int xPos = this.renderer.scaledWidth - 2 - this.renderer.getStringWidth(text);
+        this.renderer.drawString(text, xPos, yPos, color, true);
+    }
+}

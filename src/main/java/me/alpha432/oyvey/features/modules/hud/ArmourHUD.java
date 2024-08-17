@@ -5,7 +5,6 @@ import me.alpha432.oyvey.event.events.Render2DEvent;
 import me.alpha432.oyvey.util.RenderUtil;
 import me.alpha432.oyvey.util.ColorUtil;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class ArmourHUD extends Module {
@@ -40,7 +39,7 @@ public class ArmourHUD extends Module {
             float green = (is.getMaxDamage() - (float)is.getItemDamage()) / is.getMaxDamage();
             float red = 1.0F - green;
             int dmg = 100 - (int) (red * 100.0F);
-            this.renderer.drawStringWithShadow(dmg + "", (x + 8 - this.renderer.getStringWidth(dmg + "") / 2), (y - 11), ColorUtil.toRGBA((int) (red * 255.0F), (int) (green * 255.0F), 0));
+            this.renderer.drawStringWithShadow(dmg + "", (x + 8 - (float) this.renderer.getStringWidth(dmg + "") / 2), (y - 11), ColorUtil.toRGBA((int) (red * 255.0F), (int) (green * 255.0F), 0));
         }
     }
 }

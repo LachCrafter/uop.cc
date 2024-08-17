@@ -12,7 +12,7 @@ import static me.alpha432.oyvey.util.LoggerUtil.info;
 public class uop {
     public static final String MODID = "uop.cc";
     public static final String MODNAME = "uop.cc";
-    public static final String MODVER = "2.0";
+    public static final String MODVER = "2.0-beta";
     public static CommandManager commandManager;
     public static FriendManager friendManager;
     public static ModuleManager moduleManager;
