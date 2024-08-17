@@ -36,7 +36,7 @@ public class ModuleManager
     public Animation animationThread;
 
     public void init() {
-        //hud
+        // hud
         this.modules.add(new ArmourHUD());
         this.modules.add(new ArrayListJ());
         this.modules.add(new BetterPotions());
@@ -59,6 +59,7 @@ public class ModuleManager
         this.modules.add(new AntiDesyncC());
         this.modules.add(new AntiInvis());
         this.modules.add(new AntiUnicode());
+        this.modules.add(new AutoCrystal());
         this.modules.add(new AutoTrap());
         this.modules.add(new CallBackup());
         this.modules.add(new CAMessage());

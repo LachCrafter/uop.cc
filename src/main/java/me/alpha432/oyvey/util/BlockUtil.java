@@ -54,6 +54,8 @@ public class BlockUtil
         return facings;
     }
 
+
+
     public static EnumFacing getFirstFacing(BlockPos pos) {
         Iterator<EnumFacing> iterator = BlockUtil.getPossibleSides(pos).iterator();
         if (iterator.hasNext()) {

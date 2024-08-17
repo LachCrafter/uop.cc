@@ -36,6 +36,14 @@ public class DamageUtil
         return false;
     }
 
+    public static boolean isNaked(EntityPlayer player) {
+        for (ItemStack piece : player.inventory.armorInventory) {
+            if (piece == null || piece.isEmpty()) continue;
+            return false;
+        }
+        return true;
+    }
+
     public static int getItemDamage(ItemStack stack) {
         return stack.getMaxDamage() - stack.getItemDamage();
     }

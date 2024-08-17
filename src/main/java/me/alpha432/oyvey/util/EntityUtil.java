@@ -2,6 +2,7 @@ package me.alpha432.oyvey.util;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.alpha432.oyvey.uop;
+import me.alpha432.oyvey.mixin.mixins.IEntityLivingBase;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -10,6 +11,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityIronGolem;
@@ -49,6 +51,7 @@ public class EntityUtil
     public static final Vec3d[] OffsetList = new Vec3d[]{new Vec3d(1.0, 1.0, 0.0), new Vec3d(-1.0, 1.0, 0.0), new Vec3d(0.0, 1.0, 1.0), new Vec3d(0.0, 1.0, -1.0), new Vec3d(0.0, 2.0, 0.0)};
     public static final Vec3d[] antiStepOffsetList = new Vec3d[]{new Vec3d(-1.0, 2.0, 0.0), new Vec3d(1.0, 2.0, 0.0), new Vec3d(0.0, 2.0, 1.0), new Vec3d(0.0, 2.0, -1.0)};
     public static final Vec3d[] antiScaffoldOffsetList = new Vec3d[]{new Vec3d(0.0, 3.0, 0.0)};
+    public static final Vec3d[] doubleLegOffsetList = new Vec3d[]{new Vec3d(-1.0, 0.0, 0.0), new Vec3d(1.0, 0.0, 0.0), new Vec3d(0.0, 0.0, -1.0), new Vec3d(0.0, 0.0, 1.0), new Vec3d(-2.0, 0.0, 0.0), new Vec3d(2.0, 0.0, 0.0), new Vec3d(0.0, 0.0, -2.0), new Vec3d(0.0, 0.0, 2.0)};
 
     public static void attackEntity(Entity entity, boolean packet, boolean swingArm) {
         if (packet) {
@@ -89,6 +92,15 @@ public class EntityUtil
         return EntityUtil.getInterpolatedAmount(entity, partialTicks, partialTicks, partialTicks);
     }
 
+    public static double getBaseMoveSpeed() {
+        double baseSpeed = 0.2873;
+        if (mc.player != null && mc.player.isPotionActive(Potion.getPotionById(1))) {
+            final int amplifier = mc.player.getActivePotionEffect(Potion.getPotionById(1)).getAmplifier();
+            baseSpeed *= 1.0 + 0.2 * (amplifier + 1);
+        }
+        return baseSpeed;
+    }
+
     public static boolean isPassive(Entity entity) {
         if (entity instanceof EntityWolf && ((EntityWolf) entity).isAngry()) {
             return false;
@@ -99,7 +111,7 @@ public class EntityUtil
         return entity instanceof EntityIronGolem && ((EntityIronGolem) entity).getRevengeTarget() == null;
     }
 
-    public static boolean isSafe(Entity entity, int height, boolean floor) {
+    public static boolean isSafe(Entity entity, int height, boolean floor, boolean face) {
         return EntityUtil.getUnsafeBlocks(entity, height, floor).size() == 0;
     }
 
@@ -111,7 +123,7 @@ public class EntityUtil
     }
 
     public static boolean isSafe(Entity entity) {
-        return EntityUtil.isSafe(entity, 0, false);
+        return EntityUtil.isSafe(entity, 0, false, true);
     }
 
     public static BlockPos getPlayerPos(EntityPlayer player) {
@@ -289,6 +301,21 @@ public class EntityUtil
             }
         }
         return false;
+    }
+    public static double[] calculateLookAt(final double px, final double py, final double pz, final EntityPlayer me) {
+        double dirx = me.posX - px;
+        double diry = me.posY - py;
+        double dirz = me.posZ - pz;
+        final double len = Math.sqrt(dirx * dirx + diry * diry + dirz * dirz);
+        dirx /= len;
+        diry /= len;
+        dirz /= len;
+        double pitch = Math.asin(diry);
+        double yaw = Math.atan2(dirz, dirx);
+        pitch = pitch * 180.0 / 3.141592653589793;
+        yaw = yaw * 180.0 / 3.141592653589793;
+        yaw += 90.0;
+        return new double[] { yaw, pitch };
     }
 
     public static List<Vec3d> getUntrappedBlocksExtended(int extension, EntityPlayer player, boolean antiScaffold, boolean antiStep, boolean legs, boolean platform, boolean antiDrop, boolean raytrace) {
@@ -549,6 +576,10 @@ public class EntityUtil
         return (double) EntityUtil.mc.player.moveForward != 0.0 || (double) EntityUtil.mc.player.moveStrafing != 0.0;
     }
 
+    public static boolean isMoving(EntityLivingBase entity) {
+        return entity.moveForward != 0 || entity.moveStrafing != 0;
+    }
+
     public static EntityPlayer getClosestEnemy(double distance) {
         EntityPlayer closest = null;
         for (EntityPlayer player : EntityUtil.mc.world.playerEntities) {
@@ -577,6 +608,23 @@ public class EntityUtil
     public static BlockPos getPlayerPosWithEntity() {
         return new BlockPos(EntityUtil.mc.player.getRidingEntity() != null ? EntityUtil.mc.player.getRidingEntity().posX : EntityUtil.mc.player.posX, EntityUtil.mc.player.getRidingEntity() != null ? EntityUtil.mc.player.getRidingEntity().posY : EntityUtil.mc.player.posY, EntityUtil.mc.player.getRidingEntity() != null ? EntityUtil.mc.player.getRidingEntity().posZ : EntityUtil.mc.player.posZ);
     }
+    public static boolean isCrystalAtFeet(final EntityEnderCrystal crystal, final double range) {
+        for (final EntityPlayer player : EntityUtil.mc.world.playerEntities) {
+            if (EntityUtil.mc.player.getDistanceSq(player) > range * range) {
+                continue;
+            }
+            if (uop.friendManager.isFriend(player)) {
+                continue;
+            }
+            for (final Vec3d vec : EntityUtil.doubleLegOffsetList) {
+                if (new BlockPos(player.getPositionVector()).add(vec.x, vec.y, vec.z) == crystal.getPosition()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public static double[] forward(double speed) {
         float forward = EntityUtil.mc.player.movementInput.moveForward;
@@ -600,6 +648,17 @@ public class EntityUtil
         double posX = (double) forward * speed * cos + (double) side * speed * sin;
         double posZ = (double) forward * speed * sin - (double) side * speed * cos;
         return new double[]{posX, posZ};
+    }
+    public static void swingArmNoPacket(final EnumHand hand, final EntityLivingBase entity) {
+        final ItemStack stack = entity.getHeldItem(hand);
+        if (!stack.isEmpty() && stack.getItem().onEntitySwing(entity, stack)) {
+            return;
+        }
+        if (!entity.isSwingInProgress || entity.swingProgressInt >= ((IEntityLivingBase) entity).getArmSwingAnimationEnd() / 2 || entity.swingProgressInt < 0) {
+            entity.swingProgressInt = -1;
+            entity.isSwingInProgress = true;
+            entity.swingingHand = hand;
+        }
     }
 
     public static Map<String, Integer> getTextRadarPlayers() {
@@ -650,4 +709,3 @@ public class EntityUtil
         return entity.posY >= (double) blockPos.getY();
     }
 }
-

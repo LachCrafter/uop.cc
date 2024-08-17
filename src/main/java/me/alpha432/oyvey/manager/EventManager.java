@@ -28,9 +28,14 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EventManager extends Feature {
     private final Timer logoutTimer = new Timer();
+    private final AtomicBoolean tickOngoing;
+    public EventManager() {
+        this.tickOngoing = new AtomicBoolean(false);
+    }
 
     public void init() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -38,6 +43,10 @@ public class EventManager extends Feature {
 
     public void onUnload() {
         MinecraftForge.EVENT_BUS.unregister(this);
+    }
+
+    public boolean ticksOngoing() {
+        return this.tickOngoing.get();
     }
 
     @SubscribeEvent
