@@ -24,6 +24,7 @@ public class FCAIALM extends Module {
     Setting<String> cWatermark = register(new Setting("W", "Future v2.11.1", v -> doWatermark.getValue()));
     Setting<Boolean> noinfo = register(new Setting("NoInfo", false));
     Setting<Boolean> futurebeta = register(new Setting("Future Beta", false));
+    Setting<Boolean> holefillInfo = register(new Setting("HoleFill Info", false));
     boolean APstringAttacking = true;
     boolean APhasPlaced = false;
     boolean APhasAttacked = false;
@@ -142,7 +143,9 @@ public class FCAIALM extends Module {
             }
         }
 
-
+        if (text.startsWith("HoleFill") && holefillInfo.getValue()) {
+            return "HoleFill " + ChatFormatting.GRAY + "[" + ChatFormatting.WHITE + "0" + ChatFormatting.GRAY + "]";
+        }
 
         if (text.startsWith("Future v") && futurebeta.getValue()) {
             return "Future v2.13.5+27.68af4a4971";
